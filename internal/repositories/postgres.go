@@ -42,6 +42,7 @@ func (r *PostgresRepository) GetUnprocessedLogs(ctx context.Context, limit int) 
 
 	defer func() {
 		if err != nil {
+			r.logger.Error("Failed to commit transaction: %v", err)
 			_ = tx.Rollback()
 		}
 	}()
@@ -61,10 +62,12 @@ func (r *PostgresRepository) GetUnprocessedLogs(ctx context.Context, limit int) 
 
 	err = tx.SelectContext(ctx, &logs, query, limit)
 	if err != nil {
+		r.logger.Error("Failed to select unprocessed logs: %v", err)
 		return nil, err
 	}
 
 	if err = tx.Commit(); err != nil {
+		r.logger.Error("Failed to commit transaction: %v", err)
 		return nil, err
 	}
 
