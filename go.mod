@@ -1,6 +1,6 @@
 module user020603/pg-cdc-es
 
-go 1.22
+go 1.24.1
 
 toolchain go1.23.8
 
