@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"encoding/json"
 	"sync"
 	"time"
 	"user020603/pg-cdc-es/internal/models"
@@ -26,11 +27,11 @@ func NewSyncService(
 	logger *logger.Logger,
 ) *SyncService {
 	return &SyncService{
-		pgRepo:      pgRepo,
-		esRepo:      esRepo,
-		batchSize:   batchSize,
-		numWorkers:  numWorkers,
-		logger:      logger,
+		pgRepo:     pgRepo,
+		esRepo:     esRepo,
+		batchSize:  batchSize,
+		numWorkers: numWorkers,
+		logger:     logger,
 	}
 }
 
@@ -118,8 +119,16 @@ func (s *SyncService) processLogs(ctx context.Context, logs []models.AuditLog) e
 			TableName: log.TableName,
 			Operation: log.Operation,
 			UserID:    log.UserID,
-			OldData:   log.OldData,
-			NewData:   log.NewData,
+			Timestamp: log.CreatedAt,
+		}
+
+		if log.OldData.Valid && log.OldData.String != "" {
+			esLog.OldData = json.RawMessage(log.OldData.String)
+		}
+
+		// Only set NewData if it's valid
+		if log.NewData.Valid && log.NewData.String != "" {
+			esLog.NewData = json.RawMessage(log.NewData.String)
 		}
 
 		esLogs[i] = esLog
