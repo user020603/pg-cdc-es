@@ -77,7 +77,6 @@ func (s *SyncService) Start(ctx context.Context) error {
 			}
 
 			if len(logs) == 0 {
-				s.logger.Info("No unprocessed logs found")
 				time.Sleep(s.pollTimeout)
 				continue
 			}

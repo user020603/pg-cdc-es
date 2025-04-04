@@ -1,0 +1,8 @@
+{"level":"info","timestamp":"2025-04-04T12:30:54.058Z","msg":"Starting sync service..."}
+{"level":"error","timestamp":"2025-04-04T12:32:23.230Z","msg":"Ignored key without a value.","ignored":1}
+{"level":"info","timestamp":"2025-04-04T12:32:23.230Z","msg":"Found %d unprocessed logs"}
+{"level":"error","timestamp":"2025-04-04T12:32:23.275Z","msg":"Ignored key without a value.","ignored":"[200 OK] {\"took\":12,\"errors\":false,\"items\":[{\"index\":{\"_index\":\"pg_audit_logs-2025.04.04\",\"_id\":\"SgzJAJYB6hmYWajqvG_B\",\"_version\":1,\"result\":\"created\",\"_shards\":{\"total\":2,\"successful\":1,\"failed\":0},\"_seq_no\":1,\"_primary_term\":2,\"status\":201}}]}"}
+{"level":"info","timestamp":"2025-04-04T12:32:23.275Z","msg":"Bulk index response: %s"}
+{"level":"error","timestamp":"2025-04-04T12:32:23.275Z","msg":"Ignored key without a value.","ignored":1}
+{"level":"info","timestamp":"2025-04-04T12:32:23.275Z","msg":"Successfully transferred %d logs to Elasticsearch"}
+{"level":"info","timestamp":"2025-04-04T12:32:23.276Z","msg":"Bulk index successful"}

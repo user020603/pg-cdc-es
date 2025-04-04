@@ -2,11 +2,10 @@ module user020603/pg-cdc-es
 
 go 1.24.1
 
-toolchain go1.23.8
-
 require (
 	github.com/elastic/go-elasticsearch/v8 v8.17.1
 	github.com/jmoiron/sqlx v1.4.0
+	github.com/lib/pq v1.10.9
 	go.uber.org/zap v1.27.0
 )
 

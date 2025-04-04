@@ -8,6 +8,7 @@ import (
 	"user020603/pg-cdc-es/pkg/logger"
 
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 type PostgresRepository struct {
@@ -18,7 +19,6 @@ type PostgresRepository struct {
 func NewPostgresRepository(connStr string, logger *logger.Logger) (*PostgresRepository, error) {
 	db, err := sqlx.Connect("postgres", connStr)
 	if err != nil {
-		logger.Fatal("Failed to connect to database: %v", err)
 		return nil, err
 	}
 
