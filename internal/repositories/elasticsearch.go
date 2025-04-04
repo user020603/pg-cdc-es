@@ -83,5 +83,18 @@ func (r *ElasticsearchRepository) BulkIndexLogs(ctx context.Context, logs []mode
 		}
 		return fmt.Errorf("elasticsearch status: %d, error: %v", res.StatusCode, raw)
 	}
+	
+	r.logger.Info("Bulk index response: %s", res.String())
+	if res.StatusCode != 200 {
+		return fmt.Errorf("elasticsearch status: %d", res.StatusCode)
+	}
+
+	r.logger.Info("Successfully transferred %d logs to Elasticsearch", len(logs))
+    for i, log := range logs {
+        logData, _ := json.Marshal(log)
+        r.logger.Debug("Log %d successfully indexed: %s", i+1, string(logData))
+    }
+    
+    r.logger.Info("Bulk index successful")
 	return nil
 }

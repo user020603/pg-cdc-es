@@ -24,7 +24,6 @@ func NewSyncService(
 	batchSize int,
 	numWorkers int,
 	logger *logger.Logger,
-	pollTimeout time.Duration,
 ) *SyncService {
 	return &SyncService{
 		pgRepo:      pgRepo,
@@ -32,7 +31,6 @@ func NewSyncService(
 		batchSize:   batchSize,
 		numWorkers:  numWorkers,
 		logger:      logger,
-		pollTimeout: pollTimeout,
 	}
 }
 
